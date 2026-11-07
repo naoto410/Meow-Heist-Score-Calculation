@@ -44,7 +44,7 @@
 
     .content {
       display: grid;
-      grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       grid-template-rows: repeat(4,2rem);
       place-items: center;
       gap: 0.5rem;
@@ -74,6 +74,11 @@
       fill: rgb(50, 155, 255);
     }
 
+    .counterBtn {
+      padding: 0;
+      width: 1.5rem;
+    }
+
   </style>
 
   <title>ぬすっとキャット得点計算</title>
@@ -86,7 +91,6 @@
     <div class="content">
       <p>
         <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
-
         <g>
           <path class="redGem st1" d="M262.203,224.297H257.5h-99.469L78.672,333.438L260.719,512l7.5-7.359L442.75,333.438l-79.344-109.141H262.203
             z M345.813,245.75l-14.656,65.109l-51.859-65.109H345.813z M259.984,251.953l56.422,70.797H204.766L259.984,251.953z
@@ -115,11 +119,13 @@
         </svg>
         赤のおたから
       </p>
-      <p><input type="number" id="redCount"> 個</p>
-      <p>= <span id="redScore">0</span>点</p>
+      <p>
+        <button type="button" class="counterBtn">-</button>
+        <input type="number" id="redCount">
+        <button type="button" class="counterBtn">+</button> 個
+      </p>
       <p>
         <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
-
         <g>
           <path class="yellowGem st1" d="M262.203,224.297H257.5h-99.469L78.672,333.438L260.719,512l7.5-7.359L442.75,333.438l-79.344-109.141H262.203
             z M345.813,245.75l-14.656,65.109l-51.859-65.109H345.813z M259.984,251.953l56.422,70.797H204.766L259.984,251.953z
@@ -148,11 +154,13 @@
         </svg>
         黄のおたから
       </p>
-      <p><input type="number" id="yellowCount"> 個</p>
-      <p> = <span id="yellowScore">0</span>点</p>
+      <p>
+        <button type="button" class="counterBtn">-</button>
+        <input type="number" id="yellowCount">
+        <button type="button" class="counterBtn">+</button> 個
+      </p>
       <p>
         <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
-
         <g>
           <path class="blueGem st1" d="M262.203,224.297H257.5h-99.469L78.672,333.438L260.719,512l7.5-7.359L442.75,333.438l-79.344-109.141H262.203
             z M345.813,245.75l-14.656,65.109l-51.859-65.109H345.813z M259.984,251.953l56.422,70.797H204.766L259.984,251.953z
@@ -181,11 +189,13 @@
         </svg>
         青のおたから
       </p>
-      <p><input type="number" id="blueCount"> 個</p>
-      <p> = <span id="blueScore">0</span>点</p>
+      <p>
+        <button type="button" class="counterBtn">-</button>
+        <input type="number" id="blueCount">
+        <button type="button" class="counterBtn">+</button> 個
+      </p>
       <p>
         <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
-
         <g>
           <path class="st1" d="M262.203,224.297H257.5h-99.469L78.672,333.438L260.719,512l7.5-7.359L442.75,333.438l-79.344-109.141H262.203
             z M345.813,245.75l-14.656,65.109l-51.859-65.109H345.813z M259.984,251.953l56.422,70.797H204.766L259.984,251.953z
@@ -214,8 +224,11 @@
         </svg>
         黒のいしころ
       </p>
-      <p><input type="number" id="stoneCount"> 個</p>
-      <p> = <span id="stoneScore">0</span>点</p>
+      <p>
+        <button type="button" class="counterBtn">-</button>
+        <input type="number" id="stoneCount">
+        <button type="button" class="counterBtn">+</button> 個
+      </p>
     </div>
     <p class="result">合計点数 <span id="totalScore">0</span> 点</p>
     <button type="button" id="resetBtn">リセット</button>
@@ -224,39 +237,57 @@
 
 <script>
   const redCount = document.getElementById('redCount');
-  const redScore = document.getElementById('redScore');
   const yellowCount = document.getElementById('yellowCount');
-  const yellowScore = document.getElementById('yellowScore');
   const blueCount = document.getElementById('blueCount');
-  const blueScore = document.getElementById('blueScore');
   const stoneCount = document.getElementById('stoneCount');
-  const stoneScore = document.getElementById('stoneScore');
   const totalScore = document.getElementById('totalScore');
+  const resetBtn = document.getElementById('resetBtn');
 
+  // 各 input 要素を配列にまとめる
+  const countInputs = [redCount, yellowCount, blueCount, stoneCount];
+
+  // 合計スコアの計算・更新
   function update() {
     const redResult = (Number(redCount.value) || 0) * 3;
     const yellowResult = (Number(yellowCount.value) || 0) * 2;
     const blueResult = (Number(blueCount.value) || 0) * 1;
     const stoneResult = (Number(stoneCount.value) || 0) * -1;
 
-    redScore.textContent = redResult;
-    yellowScore.textContent = yellowResult;
-    blueScore.textContent = blueResult;
-    stoneScore.textContent = stoneResult;
     totalScore.textContent = redResult + yellowResult + blueResult + stoneResult;
   }
 
-  redCount.addEventListener('input', update);
-  yellowCount.addEventListener('input', update);
-  blueCount.addEventListener('input', update);
-  stoneCount.addEventListener('input', update);
+  // 1. 手動入力の監視（inputイベントでキー入力のたびに即時計算）
+  countInputs.forEach(input => {
+    input.addEventListener('input', update);
+  });
 
-  const resetBtn = document.getElementById('resetBtn');
+  // 2. インクリメント / デクリメントボタンの処理
+  document.querySelectorAll('.counterBtn').forEach(button => {
+    button.addEventListener('click', () => {
+      // ボタンと同じ親要素内の input を取得
+      const input = button.closest('p').querySelector('input[type="number"]');
+      if (!input) return;
+
+      const currentValue = Number(input.value) || 0;
+      
+      // data-step があればそれを使用、なければテキスト（+/-）から増減値を決定
+      const step = button.dataset.step 
+        ? Number(button.dataset.step) 
+        : (button.textContent.trim() === '+' ? 1 : -1);
+
+      // 0 未満にしない場合（0未満を許可する場合は Math.max は不要）
+      input.value = Math.max(0, currentValue + step);
+
+      // inputイベントを手動発火させて update() を動かす
+      input.dispatchEvent(new Event('input'));
+    });
+  });
+
+  // 3. リセットボタン
   resetBtn.addEventListener('click', () => {
-    redCount.value = '';
-    yellowCount.value = '';
-    blueCount.value = '';
-    stoneCount.value = '';
+    countInputs.forEach(input => {
+      input.value = '';
+    });
     update();
   });
 </script>
