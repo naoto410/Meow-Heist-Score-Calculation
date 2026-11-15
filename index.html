@@ -28,12 +28,24 @@
     }
 
     input {
-      width: 2.1rem;
+      width: 2rem;
+      border: none;
+      outline: none;
+      background: transparent;
+      text-align: right;
+      font-size: 90%;
+      margin-right: 0.5rem;
     }
 
     button {
       padding: 0.5rem;
       border-radius: 12px;
+    }
+
+    p {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     .img {
@@ -79,6 +91,19 @@
       width: 1.5rem;
     }
 
+    .inputWithUnit {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid #6e6e6e;
+      padding-inline: 0.2rem;
+      box-sizing: border-box;
+    }
+
+    .unit {
+      user-select: none;
+      pointer-events: none;
+    }
+
   </style>
 
   <title>ぬすっとキャット得点計算</title>
@@ -121,8 +146,11 @@
       </p>
       <p>
         <button type="button" class="counterBtn">-</button>
-        <input type="number" id="redCount">
-        <button type="button" class="counterBtn">+</button> 個
+        <sapn class="inputWithUnit">
+          <input type="number" id="redCount" inputmode="numeric">
+          <span class="unit">個</span>
+        </sapn>
+        <button type="button" class="counterBtn">+</button>
       </p>
       <p>
         <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
@@ -156,8 +184,11 @@
       </p>
       <p>
         <button type="button" class="counterBtn">-</button>
-        <input type="number" id="yellowCount">
-        <button type="button" class="counterBtn">+</button> 個
+        <sapn class="inputWithUnit">
+          <input type="number" id="yellowCount" inputmode="numeric">
+          <span class="unit">個</span>
+        </sapn>
+        <button type="button" class="counterBtn">+</button>
       </p>
       <p>
         <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
@@ -191,8 +222,11 @@
       </p>
       <p>
         <button type="button" class="counterBtn">-</button>
-        <input type="number" id="blueCount">
-        <button type="button" class="counterBtn">+</button> 個
+        <sapn class="inputWithUnit">
+          <input type="number" id="blueCount" inputmode="numeric">
+          <span class="unit">個</span>
+        </sapn>
+        <button type="button" class="counterBtn">+</button>
       </p>
       <p>
         <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="512px" viewBox="0 0 512 512" style="width: 16px; height: 16px; opacity: 1;" xml:space="preserve">
@@ -226,8 +260,11 @@
       </p>
       <p>
         <button type="button" class="counterBtn">-</button>
-        <input type="number" id="stoneCount">
-        <button type="button" class="counterBtn">+</button> 個
+        <sapn class="inputWithUnit">
+          <input type="number" id="stoneCount" inputmode="numeric">
+          <span class="unit">個</span>
+        </sapn>
+        <button type="button" class="counterBtn">+</button>
       </p>
     </div>
     <p class="result">合計点数 <span id="totalScore">0</span> 点</p>
@@ -269,10 +306,10 @@
       if (!input) return;
 
       const currentValue = Number(input.value) || 0;
-      
+
       // data-step があればそれを使用、なければテキスト（+/-）から増減値を決定
-      const step = button.dataset.step 
-        ? Number(button.dataset.step) 
+      const step = button.dataset.step
+        ? Number(button.dataset.step)
         : (button.textContent.trim() === '+' ? 1 : -1);
 
       // 0 未満にしない場合（0未満を許可する場合は Math.max は不要）
