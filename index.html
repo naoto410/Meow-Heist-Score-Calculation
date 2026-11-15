@@ -33,7 +33,7 @@
       outline: none;
       background: transparent;
       text-align: right;
-      font-size: 90%;
+      font-size: 1rem;
       margin-right: 0.5rem;
     }
 
@@ -94,12 +94,13 @@
     .inputWithUnit {
       display: inline-flex;
       align-items: center;
-      border: 1px solid #6e6e6e;
+      border-bottom: 1px solid #6e6e6e;
       padding-inline: 0.2rem;
       box-sizing: border-box;
     }
 
     .unit {
+      font-size: 0.8rem;
       user-select: none;
       pointer-events: none;
     }
@@ -147,7 +148,7 @@
       <p>
         <button type="button" class="counterBtn">-</button>
         <sapn class="inputWithUnit">
-          <input type="number" id="redCount" inputmode="numeric">
+          <input type="number" id="redCount" inputmode="numeric" value="0">
           <span class="unit">個</span>
         </sapn>
         <button type="button" class="counterBtn">+</button>
@@ -185,7 +186,7 @@
       <p>
         <button type="button" class="counterBtn">-</button>
         <sapn class="inputWithUnit">
-          <input type="number" id="yellowCount" inputmode="numeric">
+          <input type="number" id="yellowCount" inputmode="numeric" value="0">
           <span class="unit">個</span>
         </sapn>
         <button type="button" class="counterBtn">+</button>
@@ -223,7 +224,7 @@
       <p>
         <button type="button" class="counterBtn">-</button>
         <sapn class="inputWithUnit">
-          <input type="number" id="blueCount" inputmode="numeric">
+          <input type="number" id="blueCount" inputmode="numeric" value="0">
           <span class="unit">個</span>
         </sapn>
         <button type="button" class="counterBtn">+</button>
@@ -261,7 +262,7 @@
       <p>
         <button type="button" class="counterBtn">-</button>
         <sapn class="inputWithUnit">
-          <input type="number" id="stoneCount" inputmode="numeric">
+          <input type="number" id="stoneCount" inputmode="numeric" value="0">
           <span class="unit">個</span>
         </sapn>
         <button type="button" class="counterBtn">+</button>
@@ -323,7 +324,7 @@
   // 3. リセットボタン
   resetBtn.addEventListener('click', () => {
     countInputs.forEach(input => {
-      input.value = '';
+      input.value = '0';
     });
     update();
   });
